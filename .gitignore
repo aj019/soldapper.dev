@@ -1,0 +1,42 @@
+# Ignore Python cache files
+__pycache__/
+*.py[cod]
+
+# Ignore virtual environment directories
+venv/
+env/
+
+# Ignore environment variable files
+.env
+
+# Ignore log files
+*.log
+
+# Ignore compiled files
+*.pyc
+
+# Ignore test coverage reports
+htmlcov/
+.coverage
+.coverage.*
+
+# Ignore FastAPI specific files
+*.db
+*.sqlite3
+
+# Ignore node_modules for frontend
+frontend/node_modules/
+
+# Ignore build output
+frontend/build/
+
+# Ignore package lock files
+frontend/package-lock.json
+
+# Ignore IDE specific files
+.vscode/
+.idea/
+
+# Ignore miscellaneous
+.DS_Store
+Thumbs.db
