@@ -1,6 +1,6 @@
 from uagents import Agent, Context
 from wallet_models import WalletCheckRequest, WalletCheckResponse
-
+import asyncio
 # Replace this with your Wallet Agent's actual address (see terminal after you run it)
 TARGET_AGENT_DID = "agent1qvemdtgcktv9q9f9mgv3xjr689wghzprujp62mg73a08pezyy6dzzzwuhsc"
 
@@ -28,7 +28,8 @@ async def send_wallet_check(ctx: Context):
 async def handle_response(ctx: Context, sender: str, msg: WalletCheckResponse):
     print(f"\n📊 Received wallet analysis from {sender}:")
     print(msg.summary)
-    
+    global summary
+    summary = msg.summary
     print()  # Empty line for better readability
 
 #client.on_interval(period=5.0)(send_wallet_check)
@@ -36,7 +37,18 @@ async def handle_response(ctx: Context, sender: str, msg: WalletCheckResponse):
 @client.on_event('startup')
 async def startup_handler(ctx: Context):
     print("🚀 Starting wallet client...")
+    # await send_wallet_check(ctx)
+
+@client.on_rest_get("/get/wallet_analysis", WalletCheckResponse)
+async def get_messages(ctx: Context):
     await send_wallet_check(ctx)
+    global summary
+    for _ in range(10):  # wait up to 5 seconds
+        if summary:
+            return WalletCheckResponse(summary=summary)
+        
+        await asyncio.sleep(0.5)
+    
 
 if __name__ == "__main__":
     try:
