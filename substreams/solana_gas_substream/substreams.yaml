@@ -1,0 +1,28 @@
+specVersion: v0.1.0
+
+package:
+ name: solana_gas_substream
+ version: v0.1.0
+
+imports:
+  solana: https://spkg.io/streamingfast/solana-common-v0.3.3.spkg
+
+protobuf:
+ files:
+  - proto/gas.proto
+ importPaths:
+  - proto
+
+modules:
+ - name: map_wallet_gas_fees
+   kind: map
+   inputs:
+     - source: sf.solana.type.v1.Block
+   output:
+     type: proto:gas.WalletGasSpent
+
+binaries:
+  default:
+    type: wasm/rust-v1
+    file: ./target/wasm32-unknown-unknown/release/solana_gas_substream.wasm
+

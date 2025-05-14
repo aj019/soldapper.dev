@@ -1,0 +1,6 @@
+syntax = "proto3";
+package gas;
+
+message WalletGasSpent {
+  uint64 lamports = 1;
+}
