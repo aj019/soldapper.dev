@@ -92,8 +92,8 @@ def fetch_token_name(mint: str) -> str:
 agent = Agent(
     name="wallet-analyzer",
     seed="wallet analyzer agent seed",
-    endpoint=["http://localhost:8000/submit"],  # Listen on both localhost and all interfaces
-    port=8000,
+    endpoint=["http://localhost:5059/submit"],  # Listen on both localhost and all interfaces
+    port=5059,
 )
 
 @agent.on_event('startup')
