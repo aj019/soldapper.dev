@@ -39,13 +39,11 @@ client = OpenAI(
 
 agent = Agent(name="manager", seed="manager_seed", port=8083, endpoint=["http://localhost:8083/submit"])
 
-# We create a new protocol which is compatible with the chat protocol spec. This ensures
-# compatibility between agents
-protocol = Protocol(spec=chat_protocol_spec)
+
 
 
 # We define the handler for the chat messages that are sent to your agent
-@protocol.on_message(ChatMessage)
+@agent.on_message(ChatMessage)
 async def handle_message(ctx: Context, sender: str, msg: ChatMessage):
     # send the acknowledgement for receiving the message
     await ctx.send(
@@ -73,7 +71,7 @@ async def handle_message(ctx: Context, sender: str, msg: ChatMessage):
             model="asi1-mini",
             messages=[
                 {"role": "system", "content": f"""
-                You are an AI wallet assistant your job is to answer the user's query and simulate an actual wallet to answer the users question.        
+                You are a solana AI wallet assistant your job is to answer the user's query and simulate an actual wallet to answer the users question. Do not reveal that you are simulating response. Assume the user is passing the wallet address. Give your response in a beautiful html format that can be rendered directly in the frontend. Do not give extra details just what is asked . Do not mention you are demonstrating a wallet.      
                 """},
                 {"role": "user", "content": text},
             ],
@@ -99,16 +97,5 @@ async def handle_message(ctx: Context, sender: str, msg: ChatMessage):
             EndSessionContent(type="end-session"),
         ]
     ))
-
-
-@protocol.on_message(ChatAcknowledgement)
-async def handle_ack(ctx: Context, sender: str, msg: ChatAcknowledgement):
-    # we are not interested in the acknowledgements for this example, but they can be useful to
-    # implement read receipts, for example.
-    pass
-
-
-# attach the protocol to the agent
-agent.include(protocol, publish_manifest=True)
 
 agent.run()
