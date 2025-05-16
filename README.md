@@ -2,6 +2,9 @@
 
 A web application that acts as a virtual assistant using Fetch.ai uAgent and Helius for on-chain data analysis.
 
+# Demo
+https://github.com/user-attachments/assets/e0c18618-06f3-4e74-a920-5ca2fcfa215e
+
 ## Features
 - Real-time on-chain data analysis
 - AI-powered virtual assistant
