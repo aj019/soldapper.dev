@@ -63,9 +63,12 @@ function ChatApp() {
       
       // Check if the response contains HTML
       const isHtml = /<[a-z][\s\S]*>/i.test(data.summary);
+      let message = data.summary;
+      message = message.replace("```html", '');
+      message = message.replace("```", '');
       
       const assistantMessage: Message = {
-        text: data.summary,
+        text: message,
         sender: 'assistant',
         timestamp: new Date().toISOString(),
         isHtml: isHtml
