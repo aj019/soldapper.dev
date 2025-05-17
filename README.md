@@ -2,6 +2,9 @@
 
 A web application that acts as a virtual assistant using Fetch.ai uAgent and Helius for on-chain data analysis.
 
+# Demo
+https://github.com/user-attachments/assets/e0c18618-06f3-4e74-a920-5ca2fcfa215e
+
 ## Features
 - Real-time on-chain data analysis
 - AI-powered virtual assistant
@@ -25,6 +28,8 @@ A web application that acts as a virtual assistant using Fetch.ai uAgent and Hel
    ```
    HELIUS_API_KEY=your_helius_api_key
    FETCH_AI_API_KEY=your_fetch_ai_api_key
+   SUBSTREAMS_API_KEY=your_substream_ai_api_key
+   ASI1_API_KEY=your_fetch_asi_llm_api_key
    ```
 5. Start the backend server:
    ```bash
